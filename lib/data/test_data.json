@@ -1,0 +1,17 @@
+{
+  "keywords": [
+    {"keyword": "Flutter", "frequency": 120},
+    {"keyword": "Dart", "frequency": 95},
+    {"keyword": "Widget", "frequency": 80}
+  ],
+  "schemas": [
+    {"schema": "User", "frequency": 50},
+    {"schema": "Order", "frequency": 30},
+    {"schema": "Product", "frequency": 40}
+  ],
+  "statistics": {
+    "listPresence": 75,
+    "statisticalUnitPresence": 60,
+    "citationPresence": 45
+  }
+}
