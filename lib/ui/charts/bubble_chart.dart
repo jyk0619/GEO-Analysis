@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo/model/bubble_model.dart';
 
 class BubbleChartWidget extends StatelessWidget {
   final List<BubbleData> data;
@@ -8,8 +9,8 @@ class BubbleChartWidget extends StatelessWidget {
   const BubbleChartWidget({
     Key? key,
     required this.data,
-    this.width = 300,
-    this.height = 300,
+    this.width = double.infinity,
+    this.height = double.infinity,
   }) : super(key: key);
 
   @override
@@ -19,20 +20,6 @@ class BubbleChartWidget extends StatelessWidget {
       painter: BubbleChartPainter(data),
     );
   }
-}
-
-class BubbleData {
-  final double x; // x 좌표 (비율 0~1)
-  final double y; // y 좌표 (비율 0~1)
-  final double size; // 버블 크기 (반지름)
-  final Color color;
-
-  BubbleData({
-    required this.x,
-    required this.y,
-    required this.size,
-    required this.color,
-  });
 }
 
 class BubbleChartPainter extends CustomPainter {
@@ -47,9 +34,7 @@ class BubbleChartPainter extends CustomPainter {
     for (var bubble in data) {
       paint.color = bubble.color.withOpacity(0.6);
       final offset = Offset(bubble.x * size.width, size.height - bubble.y * size.height);
-
       canvas.drawCircle(offset, bubble.size, paint);
-
       // 옵션: 버블 테두리
       paint
         ..color = bubble.color
@@ -57,6 +42,31 @@ class BubbleChartPainter extends CustomPainter {
         ..strokeWidth = 2;
       canvas.drawCircle(offset, bubble.size, paint);
       paint.style = PaintingStyle.fill;
+
+
+      // 텍스트 그리기 (이름과 값)
+      final textSpan = TextSpan(
+        text: '${bubble.name}\n${bubble.size}%',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: bubble.size / 3, // 크기는 버블 크기에 따라 조절
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+      final textPainter = TextPainter(
+        text: textSpan,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      );
+
+      textPainter.layout(
+        minWidth: 0,
+        maxWidth: bubble.size * 2, // 버블 크기 내에서 줄바꿈 가능
+      );
+
+      final textOffset = offset - Offset(textPainter.width / 2, textPainter.height / 2);
+      textPainter.paint(canvas, textOffset);
     }
   }
 

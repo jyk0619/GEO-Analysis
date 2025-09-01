@@ -3,6 +3,8 @@ import 'package:geo/ui/charts/donut_chart.dart';
 import 'package:geo/ui/input_view.dart';
 import 'dart:ui';
 
+import 'package:geo/ui/report_view.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'AppleSDGothicNeo',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home:  InputView(),
+      home:  ReportView(),
     );
   }
 }
