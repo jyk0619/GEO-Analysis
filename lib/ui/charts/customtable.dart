@@ -45,6 +45,7 @@ class _ReportTableState extends State<ReportTable> {
               style: TextStyle(
                 fontSize: isHighlighted ? 16 : 14,
                 fontWeight: isHighlighted ? FontWeight.bold : null,
+                fontFamily: 'MetroSans',
                 color: isHighlighted ? Colors.blue[900] : null,
               ),
             )),
@@ -53,6 +54,7 @@ class _ReportTableState extends State<ReportTable> {
               style: TextStyle(
                 fontSize: isHighlighted ? 16 : 14,
                 fontWeight: isHighlighted ? FontWeight.bold : null,
+                fontFamily: 'MetroSans',
                 color: isHighlighted ? Colors.blue[900] : null,
               ),
             )),
@@ -61,6 +63,7 @@ class _ReportTableState extends State<ReportTable> {
               style: TextStyle(
                 fontSize: isHighlighted ? 16 : 14,
                 fontWeight: isHighlighted ? FontWeight.bold : null,
+                fontFamily: 'MetroSans',
                 color: isHighlighted ? Colors.blue[900] : null,
               ),
             )),
@@ -69,6 +72,7 @@ class _ReportTableState extends State<ReportTable> {
               style: TextStyle(
                 fontSize: isHighlighted ? 16 : 14,
                 fontWeight: isHighlighted ? FontWeight.bold : null,
+                fontFamily: 'MetroSans',
                 color: isHighlighted ? Colors.blue[900] : null,
               ),
             )),

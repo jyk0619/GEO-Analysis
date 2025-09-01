@@ -280,8 +280,8 @@ class ReportView extends StatelessWidget {
                                                 child: Center(
                                                   child: Column(
                                                     children: [
-                                                      Text('${item.value}%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
-                                                      Text('${item.current} / ${item.total}'),
+                                                      Text('${item.value}%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'MetroSans', color: Theme.of(context).primaryColor)),
+                                                      Text('${item.current} / ${item.total}', style: TextStyle(fontSize: 14, fontFamily: 'MetroSans')),
                                                     ],
                                                   ),
                                                 ),
@@ -291,7 +291,6 @@ class ReportView extends StatelessWidget {
                                         );
                                       }).toList(),
                                     ),
-
                                     ],
                                   )),
                                   ),
@@ -310,13 +309,12 @@ class ReportView extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('자주 쓰이는 테이블 통계'),
+                                  Text('주요 체크리스트'),
                                   SizedBox(height: 10),
                                   Divider(color: Colors.blueAccent),
                                   Expanded(
                                     child: ReportTable(tableItems: tableItems)
                                   )
-
                                 ],
                               ),
                             ),
@@ -345,6 +343,28 @@ class ReportView extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('검색한 쿼리 표시', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                          SizedBox(height: 10),
+                          SizedBox(child: CardPager(items: List.generate(20, (index) => '카드 아이템 ${index + 1}'))),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(10),
+                      child: Text('ⓒ 2025 중꺾마 Corp. All rights reserved.', textAlign: TextAlign.center, style: TextStyle(color: Colors.grey),),
                     )
                   ],
                 ),
@@ -357,3 +377,106 @@ class ReportView extends StatelessWidget {
   }
 }
 
+class CardPager extends StatefulWidget {
+  final List<String> items; // 카드 데이터
+
+  const CardPager({super.key, required this.items});
+
+  @override
+  State<CardPager> createState() => _CardPagerState();
+}
+
+class _CardPagerState extends State<CardPager> {
+  late final PageController _pageController;
+  int currentPage = 0;
+  final int itemsPerPage = 6;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final totalPages = (widget.items.length / itemsPerPage).ceil();
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // 왼쪽 버튼
+        IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: currentPage > 0
+              ? () {
+            _pageController.previousPage(
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOut,
+            );
+          }
+              : null,
+        ),
+
+        // 페이지 뷰 (카드들)
+        Expanded(
+          child: SizedBox(
+            height: 260, // 카드 두 줄 높이
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() => currentPage = index);
+              },
+              itemCount: totalPages,
+              itemBuilder: (context, pageIndex) {
+                final pageItems = widget.items
+                    .skip(pageIndex * itemsPerPage)
+                    .take(itemsPerPage)
+                    .toList();
+
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3, // 가로 3개
+                    mainAxisExtent: 120, // 카드 높이
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: pageItems.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: Colors.blue[100],
+                      child: Center(
+                        child: Text(pageItems[index]),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+
+        // 오른쪽 버튼
+        IconButton(
+          icon: const Icon(Icons.arrow_forward_ios),
+          onPressed: currentPage < totalPages - 1
+              ? () {
+            _pageController.nextPage(
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOut,
+            );
+          }
+              : null,
+        ),
+      ],
+    );
+  }
+}

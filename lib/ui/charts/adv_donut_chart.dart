@@ -22,7 +22,6 @@ class SyncDonutChartWidget extends StatelessWidget {
       alignment: Alignment.center, // 중앙 정렬
       children: [
         SfCircularChart(
-
           borderColor: Colors.black12,
           borderWidth: 1,
           annotations: [
@@ -49,6 +48,7 @@ class SyncDonutChartWidget extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'MetroSans',
                     ),
                     // Positioning the data label
                     labelPosition: ChartDataLabelPosition.outside,

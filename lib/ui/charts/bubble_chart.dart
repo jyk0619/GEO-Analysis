@@ -51,6 +51,7 @@ class BubbleChartPainter extends CustomPainter {
           color: Colors.white,
           fontSize: bubble.size / 3, // 크기는 버블 크기에 따라 조절
           fontWeight: FontWeight.bold,
+          fontFamily: 'MetroSans'
         ),
       );
 
