@@ -53,10 +53,6 @@ class ReportView extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
                       child: Row(
                         spacing: 10,
                         children: [
@@ -64,19 +60,78 @@ class ReportView extends StatelessWidget {
                             flex: 2,
                             child: Container(
                               height: 100,
+                              padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
-
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: Text('입력한 도메인 . 의도'),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.search, color: Theme.of(context).primaryColor,),
+                                        SizedBox(width: 5,),
+                                        Text('도메인 | 의도', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    SizedBox(
+                                      height: 44,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text('쇼핑', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
+                                          Container(width: 1, height: 18,color: Colors.grey, margin: EdgeInsets.symmetric(horizontal: 20),),
+                                          Text('비교', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, )),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Container(
+                              padding: EdgeInsets.all(10),
+                              height: 100,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.discount, color: Theme.of(context).primaryColor,),
+                                        SizedBox(width: 5,),
+                                        Text('검색한 쿼리 개수', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    SizedBox(
+                                      height: 44,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text('50 개', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              padding: EdgeInsets.all(10),
                               height: 100,
                               decoration: BoxDecoration(
 
@@ -84,36 +139,65 @@ class ReportView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: Text('검색한 쿼리 개수'),
+                                child:Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.link, color: Theme.of(context).primaryColor,),
+                                        SizedBox(width: 5,),
+                                        Text('분석한 url 수', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    SizedBox(
+                                      height: 44,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text('1,200 개', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
+
                           Expanded(
                             flex: 1,
                             child: Container(
+                              padding: EdgeInsets.all(10),
                               height: 100,
                               decoration: BoxDecoration(
-
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: Text('수집한 url 개수'),
-                              ),
-                            ),
-                          ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.incomplete_circle, color: Theme.of(context).primaryColor,),
+                                        SizedBox(width: 5,),
+                                        Text('분석 성공율', style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    SizedBox(
+                                      height: 44,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Text('100 %', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
 
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              height: 100,
-                              decoration: BoxDecoration(
-
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text('분석 성공률'),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -125,10 +209,7 @@ class ReportView extends StatelessWidget {
                       width: double.infinity,
                      height: 1020,
                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+
                       child: LayoutGrid(
                         areas: '''
                           a b
