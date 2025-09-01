@@ -11,12 +11,13 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  static const Color mainKeyColor = Color(0xFF2A62D7);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       scrollBehavior: MaterialScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.touch,
@@ -25,10 +26,10 @@ class MyApp extends StatelessWidget {
           PointerDeviceKind.unknown
         },
       ),
-
       theme: ThemeData(
         fontFamily: 'AppleSDGothicNeo',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: mainKeyColor),
+        primaryColor: mainKeyColor,
       ),
       home:  ReportView(),
     );

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/bubble_model.dart';
+import '../model/table_model.dart';
 
 final List<Map<String, dynamic>> chartData = [
   {'label': 'Schema_1', 'value': 45},
@@ -20,6 +21,24 @@ final bubbleData = [
   BubbleData(x: 0.3, y: 0.4, size: 15, color: Colors.purple, name: 'Build'),
   BubbleData(x: 0.5, y: 0.3, size: 80, color: Colors.teal, name: 'Context'),
 ];
+
+final List<TableItem> tableItems = [
+  TableItem(name: 'https', trueCount: '4', total: '45', truePercentage: '45%'),
+  TableItem(name: 'hsts', trueCount: '25', total: '45', truePercentage: '45%'),
+  TableItem(name: 'robots_txt_exists', trueCount: '15', total: '45', truePercentage: '45%'),
+  TableItem(name: 'sitemap_has_lastmod', trueCount: '5', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_faq_schema', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_author_schema', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_profilepage_schema', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_publication_date', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'mobile_friendly', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_canocial', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_hreflang', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_toc', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'has_longtail_or_question', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'page_fetched', trueCount: '10', total: '45', truePercentage: '45%'),
+];
+
 
 
 // 워드 클라우드 샘플 데이터

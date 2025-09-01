@@ -7,9 +7,12 @@ import 'package:geo/ui/charts/horizontal_bar_chart.dart';
 import 'package:geo/ui/charts/pie_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:geo/ui/charts/word_cloud.dart';
+import '../model/table_model.dart';
 import 'charts/bar_chart.dart';
 import 'package:geo/data/sample_data.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+
+import 'charts/customtable.dart';
 
 class ReportView extends StatelessWidget {
   const ReportView({super.key});
@@ -33,7 +36,7 @@ class ReportView extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: 1200,
+                  maxWidth: 1440,
                   minWidth: 800,
                 ),
                 child: Column(
@@ -54,58 +57,64 @@ class ReportView extends StatelessWidget {
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Wrap(
-                        alignment: WrapAlignment.center,
+                      child: Row(
                         spacing: 10,
-                        runSpacing: 10,
                         children: [
-                          Container(
-                            width: 200,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text('입력한 도메인 . 의도'),
-                            ),
-                          ),
-                          Container(
-                            width: 200,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text('검색한 쿼리 개수'),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('입력한 도메인 . 의도'),
+                              ),
                             ),
                           ),
-                          Container(
-                            width: 200,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('검색한 쿼리 개수'),
+                              ),
                             ),
-                            child: Center(
-                              child: Text('수집한 url 개수'),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('수집한 url 개수'),
+                              ),
                             ),
                           ),
 
-                          Container(
-                            width: 200,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text('분석 성공률'),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text('분석 성공률'),
+                              ),
                             ),
                           ),
                         ],
@@ -156,7 +165,29 @@ class ReportView extends StatelessWidget {
                             ),
                           )),
                           gridArea('b').containing(Container(color: Colors.blueAccent,),),
-                          gridArea('c').containing(Container(color: Colors.greenAccent,),),
+                          gridArea('c').containing(Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('자주 쓰이는 테이블 통계'),
+                                  SizedBox(height: 10),
+                                  Divider(color: Colors.blueAccent),
+                                  Expanded(
+                                    child: ReportTable(tableItems: tableItems)
+                                  )
+
+                                ],
+                              ),
+                            ),
+                          )),
                           gridArea('d').containing(Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -192,3 +223,4 @@ class ReportView extends StatelessWidget {
     );
   }
 }
+
