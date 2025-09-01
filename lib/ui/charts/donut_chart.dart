@@ -110,8 +110,8 @@ class _DonutChartPainter extends CustomPainter {
     // 값에 해당하는 진행 원
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
-      math.radians(-90),
-      math.radians(-sweepAngleDegrees),
+      math.radians(-270),
+      math.radians(sweepAngleDegrees),
       false,
       valuePaint,
     );

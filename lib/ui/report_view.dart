@@ -245,7 +245,59 @@ class ReportView extends StatelessWidget {
                               ],
                             ),
                           )),
-                          gridArea('b').containing(Container(color: Colors.blueAccent,),),
+                          gridArea('b').containing(Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('자주 쓰이는 테이블 통계'),
+                                SizedBox(height: 10),
+                                Expanded(
+                                  child: SizedBox(width: double.infinity,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 50,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: donutChartItems.map((item) {
+                                        return SizedBox(
+                                          width: 180,
+                                          child: Column(
+                                            children: [
+                                              Text(item.title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                              SizedBox(height: 80),
+                                              DonutChart(
+                                                radius: 70,
+                                                strokeWidth: 20,
+                                                total: 100,
+                                                value: item.value,
+                                                child: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      Text('${item.value}%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
+                                                      Text('${item.current} / ${item.total}'),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+
+                                    ],
+                                  )),
+                                  ),
+                              ],
+                            ),
+                          ),),
                           gridArea('c').containing(Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -284,7 +336,7 @@ class ReportView extends StatelessWidget {
                                 Expanded(
                                   child: SyncDonutChartWidget(
                                     centerTitle: '스키마',
-                                    data: chartData,
+                                    data: chartData.map((item) => {'label': item.label, 'value': item.value}).toList(),
                                   ),
                                 ),
                               ],

@@ -3,15 +3,18 @@
 import 'package:flutter/material.dart';
 
 import '../model/bubble_model.dart';
+import '../model/donut_model.dart';
+import '../model/schema_model.dart';
 import '../model/table_model.dart';
 
-final List<Map<String, dynamic>> chartData = [
-  {'label': 'Schema_1', 'value': 45},
-  {'label': 'Schema_2', 'value': 25},
-  {'label': 'Schema_3', 'value': 15},
-  {'label': 'Schema_4', 'value': 5},
-  {'label': 'Others', 'value': 10},
+final List<ChartDataItem> chartData = [
+  ChartDataItem(label: 'Schema_1', value: 45),
+  ChartDataItem(label: 'Schema_2', value: 25),
+  ChartDataItem(label: 'Schema_3', value: 15),
+  ChartDataItem(label: 'Schema_4', value: 5),
+  ChartDataItem(label: 'Others', value: 10),
 ];
+
 
 final bubbleData = [
   BubbleData(x: 0.2, y: 0.8, size: 20, color: Colors.blue, name: 'Flutter'),
@@ -37,6 +40,12 @@ final List<TableItem> tableItems = [
   TableItem(name: 'has_toc', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_longtail_or_question', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'page_fetched', trueCount: '10', total: '45', truePercentage: '45%'),
+];
+
+final List<DonutChartItem> donutChartItems = [
+  DonutChartItem(title: '목록형', value: 60, current: 720, total: 1200),
+  DonutChartItem(title: '통계값', value: 50, current: 600, total: 1200),
+  DonutChartItem(title: '인용', value: 80, current: 960, total: 1200),
 ];
 
 
