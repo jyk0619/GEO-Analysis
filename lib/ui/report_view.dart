@@ -26,7 +26,7 @@ class ReportView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFF7F7F7),
-        title: Text('보고서 화면임'),
+
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -223,7 +223,7 @@ class ReportView extends StatelessWidget {
                         columnGap: 10,
                         children: [
                           gridArea('a').containing(Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               color: Colors.white,
 
@@ -233,7 +233,7 @@ class ReportView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('자주 쓰는 키워드 통계'),
-                                SizedBox(height: 10),
+                                SizedBox(height: 15),
                                 Expanded(
                                   child: BubbleChartWidget(
                                     data: bubbleData,
@@ -243,7 +243,7 @@ class ReportView extends StatelessWidget {
                             ),
                           )),
                           gridArea('b').containing(Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               color: Colors.white,
 
@@ -253,7 +253,7 @@ class ReportView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('자주 쓰이는 테이블 통계'),
-                                SizedBox(height: 10),
+                                SizedBox(height: 15),
                                 Expanded(
                                   child: SizedBox(width: double.infinity,
                                   child: Column(
@@ -271,13 +271,13 @@ class ReportView extends StatelessWidget {
                                               SizedBox(height: 80),
                                               DonutChart(
                                                 radius: 70,
-                                                strokeWidth: 20,
+                                                strokeWidth: 5,
                                                 total: 100,
                                                 value: item.value,
                                                 child: Center(
                                                   child: Column(
                                                     children: [
-                                                      Text('${item.value}%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'MetroSans', color: Theme.of(context).primaryColor)),
+                                                      Text('${item.value}%', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, fontFamily: 'MetroSans')),
                                                       Text('${item.current} / ${item.total}', style: TextStyle(fontSize: 14, fontFamily: 'MetroSans')),
                                                     ],
                                                   ),
@@ -295,7 +295,7 @@ class ReportView extends StatelessWidget {
                             ),
                           ),),
                           gridArea('c').containing(Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -316,7 +316,7 @@ class ReportView extends StatelessWidget {
                             ),
                           )),
                           gridArea('d').containing(Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -325,7 +325,7 @@ class ReportView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('자주 쓰이는 스키마 통계'),
-                                SizedBox(height: 10),
+                                SizedBox(height: 15),
                                 Expanded(
                                   child: SyncDonutChartWidget(
                                     centerTitle: '스키마',
@@ -403,26 +403,12 @@ class _CardPagerState extends State<CardPager> {
   Widget build(BuildContext context) {
     final totalPages = (widget.items.length / itemsPerPage).ceil();
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // 왼쪽 버튼
-        IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: currentPage > 0
-              ? () {
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeInOut,
-            );
-          }
-              : null,
-        ),
-
-        // 페이지 뷰 (카드들)
-        Expanded(
-          child: SizedBox(
-            height: 260, // 카드 두 줄 높이
+    return SizedBox(
+      height: 260, // 전체 높이 고정
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20), // 버튼 공간 확보
             child: PageView.builder(
               controller: _pageController,
               onPageChanged: (index) {
@@ -438,10 +424,9 @@ class _CardPagerState extends State<CardPager> {
                 return GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // 가로 3개
-                    mainAxisExtent: 120, // 카드 높이
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisExtent: 120,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
@@ -449,71 +434,122 @@ class _CardPagerState extends State<CardPager> {
                   itemBuilder: (context, index) {
                     return Card(
                       color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('검색한 쿼리'),
-                                    SizedBox(height: 10),
-                                    Text('검색한 쿼리${[index]}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('검색한 쿼리'),
+                                  SizedBox(height: 10),
+                                  Text('검색한 쿼리${[index]}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
                                           padding: EdgeInsets.all(4),
                                           decoration: BoxDecoration(
                                               color: Colors.black,
-                                          borderRadius: BorderRadius.circular(4)
+                                              borderRadius: BorderRadius.circular(4)
                                           ),
-                                            child: Image.asset('assets/images/perplexity.png', width: 20, height: 20,)),
-                                        SizedBox(width: 5),
-                                        Card(
-                                          color: Colors.blue.shade50,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-                                            child: Text('+5 References', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor),),
-                                          ),
+                                          child: Image.asset('assets/images/perplexity.png', width: 20, height: 20,)),
+                                      SizedBox(width: 5),
+                                      Card(
+                                        color: Colors.blue.shade50,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                                          child: Text('+5 References', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor),),
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              IconButton(
-                                icon: Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor,),
-                                onPressed: () {
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor,),
+                              onPressed: () {
 
-                                },
-                              ),
-                            ],
-                          ),
+                              },
+                            ),
+                          ],
                         ),
+                      ),
                     );
                   },
                 );
               },
             ),
           ),
+        currentPage<=0
+            ?SizedBox()
+            :Positioned(
+        left: 0,
+        top: 0,
+        bottom: 40,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 4,
+                offset: Offset(2, 0),
+              ),
+            ],
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor,),
+            onPressed: currentPage > 0
+                ? () {
+              _pageController.previousPage(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+              );
+            }
+                : null,
+          ),
         ),
+      ),
+        currentPage>=totalPages-1
+            ?SizedBox()
+            :
+      Positioned(
+        right: 0,
+        top: 0,
+        bottom: 40,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 4,
+                offset: Offset(2, 0),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: Icon(Icons.arrow_forward, color: Theme.of(context).primaryColor,),
+            onPressed: currentPage < totalPages - 1
+                ? () {
+              _pageController.nextPage(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+              );
+            }
+                : null,
+          ),
+        ),
+      ),
 
-        // 오른쪽 버튼
-        IconButton(
-          icon: const Icon(Icons.arrow_forward_ios),
-          onPressed: currentPage < totalPages - 1
-              ? () {
-            _pageController.nextPage(
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeInOut,
-            );
-          }
-              : null,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

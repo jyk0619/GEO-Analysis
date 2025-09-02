@@ -83,7 +83,7 @@ class _DonutChartPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Offset center = Offset(size.width / 2, size.height / 2);
     final double radius = size.width / 2 - strokeWidth / 2;
-
+    final value = (sweepAngleDegrees / 360)*100;
     // 배경 원
     final Paint backgroundPaint = Paint()
       ..color = Colors.grey.shade200
@@ -93,10 +93,14 @@ class _DonutChartPainter extends CustomPainter {
 
     // 진행 원
     final Paint valuePaint = Paint()
-      ..color = Colors.blue
+      ..color = value>70
+          ?Color(0xFF2A62D7)
+          :value>40
+          ?Color(0xFF60A9F3)
+          :Color(0xFFBCDBFF)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
+      ..strokeCap = StrokeCap.square;
 
     // 전체 원
     canvas.drawArc(

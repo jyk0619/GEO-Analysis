@@ -21,9 +21,25 @@ class BubbleChartWidget extends StatelessWidget {
     );
   }
 }
-
 class BubbleChartPainter extends CustomPainter {
   final List<BubbleData> data;
+
+  final List<Offset> fixedPositions = [
+    Offset(0.4, 0.45),
+    Offset(0.6, 0.65),
+    Offset(0.75, 0.45),
+    Offset(0.6, 0.35),
+    Offset(0.7, 0.75),
+  ];
+
+  final List<Color> fixedColors = [
+    Color(0xFF2A62D7),
+    Color(0xFF454545),
+    Color(0xFF737373),
+    Color(0xFF9A9A9A),
+    Color(0xFFB5B5B5),
+    Color(0xFFCFCFCF),
+  ];
 
   BubbleChartPainter(this.data);
 
@@ -31,27 +47,31 @@ class BubbleChartPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
 
-    for (var bubble in data) {
-      paint.color = bubble.color.withOpacity(0.6);
-      final offset = Offset(bubble.x * size.width, size.height - bubble.y * size.height);
-      canvas.drawCircle(offset, bubble.size, paint);
-      // 옵션: 버블 테두리
+    for (int i = 0; i < data.length; i++) {
+      final bubble = data[i];
+
+      final pos = fixedPositions[i % fixedPositions.length];
+      final offset = Offset(pos.dx * size.width, size.height - pos.dy * size.height);
+
+      final color = fixedColors[i % fixedColors.length];
+      paint.color = color;
+
+      canvas.drawCircle(offset, bubble.size*1.5, paint);
+
       paint
-        ..color = bubble.color
+        ..color = color
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 0;
-      canvas.drawCircle(offset, bubble.size, paint);
+        ..strokeWidth = 1;
+      canvas.drawCircle(offset, bubble.size*1.2, paint);
       paint.style = PaintingStyle.fill;
 
-
-      // 텍스트 그리기 (이름과 값)
       final textSpan = TextSpan(
         text: '${bubble.name}\n${bubble.size}%',
         style: TextStyle(
           color: Colors.white,
-          fontSize: bubble.size / 3, // 크기는 버블 크기에 따라 조절
+          fontSize: bubble.size / 2,
           fontWeight: FontWeight.bold,
-          fontFamily: 'MetroSans'
+          fontFamily: 'MetroSans',
         ),
       );
 
@@ -63,7 +83,7 @@ class BubbleChartPainter extends CustomPainter {
 
       textPainter.layout(
         minWidth: 0,
-        maxWidth: bubble.size * 2, // 버블 크기 내에서 줄바꿈 가능
+        maxWidth: bubble.size * 2,
       );
 
       final textOffset = offset - Offset(textPainter.width / 2, textPainter.height / 2);

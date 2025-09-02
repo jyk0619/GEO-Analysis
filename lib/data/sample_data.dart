@@ -17,11 +17,12 @@ final List<ChartDataItem> chartData = [
 
 
 final bubbleData = [
-  BubbleData(x: 0.4, y: 0.6, size: 30, color: Color(0xFF737373), name: 'Dart'),
-  BubbleData(x: 0.6, y: 0.7, size: 35, color: Color(0xFF454545), name: 'Widget'),
-  BubbleData(x: 0.8, y: 0.5, size: 55, color: Color(0xFF737373), name: 'State'),
-  BubbleData(x: 0.3, y: 0.4, size: 15, color: Color(0xFF454545), name: 'Build'),
-  BubbleData(x: 0.5, y: 0.3, size: 80, color: Color(0xFF2A62D7), name: 'Context'),
+  BubbleData(size: 80, name: 'Context'),
+  BubbleData(size: 30,  name: 'Dart'),
+  BubbleData(size: 20, name: 'Widget'),
+  BubbleData(size: 55,name: 'State'),
+  BubbleData(size: 15,name: 'Build'),
+
 ];
 
 final List<TableItem> tableItems = [
