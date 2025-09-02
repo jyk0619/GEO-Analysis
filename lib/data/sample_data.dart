@@ -17,24 +17,23 @@ final List<ChartDataItem> chartData = [
 
 
 final bubbleData = [
-  BubbleData(x: 0.2, y: 0.8, size: 20, color: Colors.blue, name: 'Flutter'),
-  BubbleData(x: 0.4, y: 0.6, size: 30, color: Colors.green, name: 'Dart'),
-  BubbleData(x: 0.6, y: 0.7, size: 35, color: Colors.orange, name: 'Widget'),
-  BubbleData(x: 0.8, y: 0.5, size: 55, color: Colors.red, name: 'State'),
-  BubbleData(x: 0.3, y: 0.4, size: 15, color: Colors.purple, name: 'Build'),
-  BubbleData(x: 0.5, y: 0.3, size: 80, color: Colors.teal, name: 'Context'),
+  BubbleData(x: 0.4, y: 0.6, size: 30, color: Color(0xFF737373), name: 'Dart'),
+  BubbleData(x: 0.6, y: 0.7, size: 35, color: Color(0xFF454545), name: 'Widget'),
+  BubbleData(x: 0.8, y: 0.5, size: 55, color: Color(0xFF737373), name: 'State'),
+  BubbleData(x: 0.3, y: 0.4, size: 15, color: Color(0xFF454545), name: 'Build'),
+  BubbleData(x: 0.5, y: 0.3, size: 80, color: Color(0xFF2A62D7), name: 'Context'),
 ];
 
 final List<TableItem> tableItems = [
   TableItem(name: 'https', trueCount: '4', total: '45', truePercentage: '45%'),
   TableItem(name: 'hsts', trueCount: '25', total: '45', truePercentage: '45%'),
-  TableItem(name: 'robots_txt_exists', trueCount: '15', total: '45', truePercentage: '45%'),
+  TableItem(name: 'robots_txt_exists', trueCount: '15', total: '45', truePercentage: '55%'),
   TableItem(name: 'sitemap_has_lastmod', trueCount: '5', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_faq_schema', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_author_schema', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_profilepage_schema', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_publication_date', trueCount: '10', total: '45', truePercentage: '45%'),
-  TableItem(name: 'mobile_friendly', trueCount: '10', total: '45', truePercentage: '45%'),
+  TableItem(name: 'mobile_friendly', trueCount: '10', total: '45', truePercentage: '75%'),
   TableItem(name: 'has_canocial', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_hreflang', trueCount: '10', total: '45', truePercentage: '45%'),
   TableItem(name: 'has_toc', trueCount: '10', total: '45', truePercentage: '45%'),

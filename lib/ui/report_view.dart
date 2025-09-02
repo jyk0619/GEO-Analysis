@@ -11,8 +11,11 @@ import '../model/table_model.dart';
 import 'charts/bar_chart.dart';
 import 'package:geo/data/sample_data.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-
 import 'charts/customtable.dart';
+
+
+
+
 
 class ReportView extends StatelessWidget {
   const ReportView({super.key});
@@ -22,7 +25,7 @@ class ReportView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Color(0xFFF7F7F7),
         title: Text('보고서 화면임'),
         centerTitle: true,
       ),
@@ -43,13 +46,6 @@ class ReportView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      '보고서',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(10),
@@ -62,7 +58,8 @@ class ReportView extends StatelessWidget {
                               height: 100,
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
+                                color: Colors.white,
+
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
@@ -99,7 +96,7 @@ class ReportView extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               height: 100,
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
@@ -134,8 +131,8 @@ class ReportView extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               height: 100,
                               decoration: BoxDecoration(
+                                color: Colors.white,
 
-                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
@@ -171,7 +168,8 @@ class ReportView extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               height: 100,
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
+                                color: Colors.white,
+
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
@@ -192,7 +190,6 @@ class ReportView extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
                                           Text('100 %', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
-
                                         ],
                                       ),
                                     ),
@@ -229,7 +226,7 @@ class ReportView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: Colors.grey),
+
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -249,7 +246,7 @@ class ReportView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: Colors.grey),
+
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -301,7 +298,6 @@ class ReportView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: SizedBox(
@@ -323,7 +319,6 @@ class ReportView extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -349,7 +344,8 @@ class ReportView extends StatelessWidget {
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
+                        color: Colors.white,
+
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -452,10 +448,51 @@ class _CardPagerState extends State<CardPager> {
                   itemCount: pageItems.length,
                   itemBuilder: (context, index) {
                     return Card(
-                      color: Colors.blue[100],
-                      child: Center(
-                        child: Text(pageItems[index]),
-                      ),
+                      color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('검색한 쿼리'),
+                                    SizedBox(height: 10),
+                                    Text('검색한 쿼리${[index]}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                    SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                              color: Colors.black,
+                                          borderRadius: BorderRadius.circular(4)
+                                          ),
+                                            child: Image.asset('assets/images/perplexity.png', width: 20, height: 20,)),
+                                        SizedBox(width: 5),
+                                        Card(
+                                          color: Colors.blue.shade50,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                                            child: Text('+5 References', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor),),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor,),
+                                onPressed: () {
+
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
                     );
                   },
                 );

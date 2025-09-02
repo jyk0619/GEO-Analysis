@@ -39,7 +39,7 @@ class BubbleChartPainter extends CustomPainter {
       paint
         ..color = bubble.color
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 2;
+        ..strokeWidth = 0;
       canvas.drawCircle(offset, bubble.size, paint);
       paint.style = PaintingStyle.fill;
 

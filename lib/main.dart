@@ -12,6 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   static const Color mainKeyColor = Color(0xFF2A62D7);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'AppleSDGothicNeo',
         colorScheme: ColorScheme.fromSeed(seedColor: mainKeyColor),
         primaryColor: mainKeyColor,
+        scaffoldBackgroundColor: Color(0xFFF7F7F7),
       ),
       home:  ReportView(),
     );
