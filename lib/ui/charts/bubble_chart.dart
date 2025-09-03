@@ -26,10 +26,10 @@ class BubbleChartPainter extends CustomPainter {
 
   final List<Offset> fixedPositions = [
     Offset(0.4, 0.45),
-    Offset(0.6, 0.65),
+    Offset(0.6, 0.75),
     Offset(0.75, 0.45),
     Offset(0.6, 0.35),
-    Offset(0.7, 0.75),
+    Offset(0.7, 0.65),
   ];
 
   final List<Color> fixedColors = [

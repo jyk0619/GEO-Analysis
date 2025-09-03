@@ -63,7 +63,9 @@ class SyncDonutChartWidget extends StatelessWidget {
               dataLabelSettings: DataLabelSettings(
                 isVisible: true,
                 labelPosition: ChartDataLabelPosition.outside,
-                labelAlignment: ChartDataLabelAlignment.bottom,                connectorLineSettings: const ConnectorLineSettings(
+                labelAlignment: ChartDataLabelAlignment.bottom,
+                textStyle: TextStyle(fontFamily: 'MetroSans',fontSize: 16, fontWeight: FontWeight.bold),
+                connectorLineSettings: const ConnectorLineSettings(
                   type: ConnectorType.line,
                   length: '30%',
                   width: 1,
@@ -74,7 +76,11 @@ class SyncDonutChartWidget extends StatelessWidget {
               startAngle: startAngle, // 시작 위치 조정
             ),
           ],
-          legend: Legend(isVisible: false),
+          legend: Legend(
+            isVisible: true,
+            position: LegendPosition.bottom,
+
+          ),
         ),
       ],
     );

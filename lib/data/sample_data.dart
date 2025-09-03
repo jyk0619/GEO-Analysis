@@ -43,7 +43,7 @@ final List<TableItem> tableItems = [
 ];
 
 final List<DonutChartItem> donutChartItems = [
-  DonutChartItem(title: '목록형', value: 60, current: 720, total: 1200),
+  DonutChartItem(title: '목록형', value: 30, current: 720, total: 1200),
   DonutChartItem(title: '통계값', value: 50, current: 600, total: 1200),
   DonutChartItem(title: '인용', value: 80, current: 960, total: 1200),
 ];

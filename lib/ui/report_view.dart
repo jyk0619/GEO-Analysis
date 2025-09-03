@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:geo/ui/animations/countup.dart';
 import 'package:geo/ui/charts/adv_donut_chart.dart';
 import 'package:geo/ui/charts/bubble_chart.dart';
 import 'package:geo/ui/charts/donut_chart.dart';
@@ -26,7 +27,6 @@ class ReportView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFF7F7F7),
-
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -59,7 +59,6 @@ class ReportView extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
@@ -116,7 +115,8 @@ class ReportView extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Text('50 개', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
+                                          CountUpText(fractionDigits: 0, end: 50, suffix:'개' ,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),),
+
                                         ],
                                       ),
                                     ),
@@ -152,7 +152,7 @@ class ReportView extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Text('1,200 개', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
+                                          CountUpText(fractionDigits:0,end: 1200, suffix:'개' ,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),),
                                         ],
                                       ),
                                     ),
@@ -169,7 +169,6 @@ class ReportView extends StatelessWidget {
                               height: 100,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
@@ -189,8 +188,7 @@ class ReportView extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Text('100 %', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
-                                        ],
+                                         CountUpText(end: 98, suffix:'%' ,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),)],
                                       ),
                                     ),
                                   ],
@@ -277,7 +275,7 @@ class ReportView extends StatelessWidget {
                                                 child: Center(
                                                   child: Column(
                                                     children: [
-                                                      Text('${item.value}%', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, fontFamily: 'MetroSans')),
+                                                      CountUpText(end: item.value, suffix:'%' ,style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold, fontFamily: 'MetroSans'),),
                                                       Text('${item.current} / ${item.total}', style: TextStyle(fontSize: 14, fontFamily: 'MetroSans')),
                                                     ],
                                                   ),
