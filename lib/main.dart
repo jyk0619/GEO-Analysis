@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:geo/services/geo_api.dart';
 import 'package:geo/ui/charts/donut_chart.dart';
 import 'package:geo/ui/input_view.dart';
+import 'package:geo/viewmodels/report_vm.dart';
 import 'dart:ui';
-
+import 'package:provider/provider.dart';
 import 'package:geo/ui/report_view.dart';
+import 'package:geo/viewmodels/input_vm.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => InputViewModel()),
+      ChangeNotifierProvider(create: (_) => ReportViewModel(GeoApiService())),
+    ],
+    child: const MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -33,47 +42,7 @@ class MyApp extends StatelessWidget {
         primaryColor: mainKeyColor,
         scaffoldBackgroundColor: Color(0xFFF7F7F7),
       ),
-      home:  ReportView(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('테스트 화면임'),
-      ),
-      body: Wrap(
-        children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: Center(
-              child: DonutChart(
-                radius: 50,
-                strokeWidth: 10,
-                  total: 100,
-                  value: 85,
-              child: Center(
-                child: Text('85%'),
-              )
-              ),
-            ),
-          ),
-        ],
-      ),
+      home:  InputView(),
     );
   }
 }

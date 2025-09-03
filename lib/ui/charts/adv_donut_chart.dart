@@ -25,7 +25,7 @@ class SyncDonutChartWidget extends StatelessWidget {
     required this.centerTitle,
     required this.data,
     this.innerRadius = '70%',
-    this.radius = '70%',
+    this.radius = '60%',
     this.reverseOrder = false,
     this.startAngle = 0, // 기본값 0도
   }) : super(key: key);
@@ -64,7 +64,7 @@ class SyncDonutChartWidget extends StatelessWidget {
                 isVisible: true,
                 labelPosition: ChartDataLabelPosition.outside,
                 labelAlignment: ChartDataLabelAlignment.bottom,
-                textStyle: TextStyle(fontFamily: 'MetroSans',fontSize: 16, fontWeight: FontWeight.bold),
+                textStyle: TextStyle(fontFamily: 'MetroSans',fontSize: 14, fontWeight: FontWeight.bold, overflow: TextOverflow.visible),
                 connectorLineSettings: const ConnectorLineSettings(
                   type: ConnectorType.line,
                   length: '30%',
@@ -77,8 +77,8 @@ class SyncDonutChartWidget extends StatelessWidget {
             ),
           ],
           legend: Legend(
-            isVisible: true,
-            position: LegendPosition.bottom,
+            isVisible: false,
+            position: LegendPosition.top,
 
           ),
         ),

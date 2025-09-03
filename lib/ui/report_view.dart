@@ -4,17 +4,11 @@ import 'package:geo/ui/animations/countup.dart';
 import 'package:geo/ui/charts/adv_donut_chart.dart';
 import 'package:geo/ui/charts/bubble_chart.dart';
 import 'package:geo/ui/charts/donut_chart.dart';
-import 'package:geo/ui/charts/horizontal_bar_chart.dart';
-import 'package:geo/ui/charts/pie_chart.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:geo/ui/charts/word_cloud.dart';
-import '../model/table_model.dart';
-import 'charts/bar_chart.dart';
 import 'package:geo/data/sample_data.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:provider/provider.dart';
 import 'charts/customtable.dart';
-
-
+import 'package:geo/viewmodels/report_vm.dart';
 
 
 
@@ -23,6 +17,7 @@ class ReportView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reportViewModel = Provider.of<ReportViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +50,7 @@ class ReportView extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              height: 100,
+                              height: 120,
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -78,9 +73,9 @@ class ReportView extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          Text('쇼핑', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, ),),
+                                          Text('쇼핑', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, ),),
                                           Container(width: 1, height: 18,color: Colors.grey, margin: EdgeInsets.symmetric(horizontal: 20),),
-                                          Text('비교', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, )),
+                                          Text('비교', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, )),
                                         ],
                                       ),
                                     ),
@@ -93,7 +88,7 @@ class ReportView extends StatelessWidget {
                             flex: 1,
                             child: Container(
                               padding: EdgeInsets.all(10),
-                              height: 100,
+                              height: 120,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
@@ -112,13 +107,9 @@ class ReportView extends StatelessWidget {
                                     SizedBox(height: 10),
                                     SizedBox(
                                       height: 44,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          CountUpText(fractionDigits: 0, end: 50, suffix:'개' ,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),),
-
-                                        ],
-                                      ),
+                                      child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: CountUpText(fractionDigits: 0, end: 50, suffix:'개' ,style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),)),
                                     ),
                                   ],
                                 ),
@@ -129,7 +120,7 @@ class ReportView extends StatelessWidget {
                             flex: 1,
                             child: Container(
                               padding: EdgeInsets.all(10),
-                              height: 100,
+                              height: 120,
                               decoration: BoxDecoration(
                                 color: Colors.white,
 
@@ -152,7 +143,7 @@ class ReportView extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          CountUpText(fractionDigits:0,end: 1200, suffix:'개' ,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),),
+                                          CountUpText(fractionDigits:0,end: 1200, suffix:'개' ,style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),),
                                         ],
                                       ),
                                     ),
@@ -166,7 +157,7 @@ class ReportView extends StatelessWidget {
                             flex: 1,
                             child: Container(
                               padding: EdgeInsets.all(10),
-                              height: 100,
+                              height: 120,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
@@ -188,7 +179,7 @@ class ReportView extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                         CountUpText(end: 98, suffix:'%' ,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),)],
+                                         CountUpText(end: 98, suffix:'%' ,style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),)],
                                       ),
                                     ),
                                   ],
@@ -208,14 +199,15 @@ class ReportView extends StatelessWidget {
                       child: LayoutGrid(
                         areas: '''
                           a b
-                          c b
+                          a d
+                          c d
                           c d
                         ''',
                         columnSizes: [
                           1.fr, 1.fr, // 가로는 동일 비율
                         ],
                         rowSizes: [
-                          0.8.fr, 0.2.fr, 1.fr
+                          0.6.fr, 0.2.fr, 0.2.fr, 0.8.fr
                         ],
                         rowGap: 10,
                         columnGap: 10,
@@ -224,17 +216,17 @@ class ReportView extends StatelessWidget {
                             padding: EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               color: Colors.white,
-
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('자주 쓰는 키워드 통계'),
-                                SizedBox(height: 15),
+                                SizedBox(height: 20),
                                 Expanded(
-                                  child: BubbleChartWidget(
-                                    data: bubbleData,
+                                  child: BubbleChartWithLegend(
+                                    data: reportViewModel.keywordBubbleData,
+                                    //bubbleData,
                                   ),
                                 ),
                               ],
@@ -252,22 +244,29 @@ class ReportView extends StatelessWidget {
                               children: [
                                 Text('자주 쓰이는 테이블 통계'),
                                 SizedBox(height: 15),
-                                Expanded(
-                                  child: SizedBox(width: double.infinity,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: 50,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: donutChartItems.map((item) {
-                                        return SizedBox(
-                                          width: 180,
-                                          child: Column(
-                                            children: [
-                                              Text(item.title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                                              SizedBox(height: 80),
-                                              DonutChart(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: reportViewModel.donutChartData.map((item) {
+                                      return Container(
+                                        width: 220,
+                                        height: 220,
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(color: Colors.grey.shade300),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: 10),
+                                            Text(item.title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                                            SizedBox(height: 50),
+                                            SizedBox(
+                                              width: 150,
+                                              child: DonutChart(
                                                 radius: 70,
                                                 strokeWidth: 5,
                                                 total: 100,
@@ -281,14 +280,15 @@ class ReportView extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
-                                    ],
-                                  )),
+                                            ),
+                                            SizedBox(height: 20)
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
                                   ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),),
@@ -305,9 +305,10 @@ class ReportView extends StatelessWidget {
                                 children: [
                                   Text('주요 체크리스트'),
                                   SizedBox(height: 10),
-                                  Divider(color: Colors.blueAccent),
+                                  Divider(color: Theme.of(context).primaryColor,),
                                   Expanded(
-                                    child: ReportTable(tableItems: tableItems)
+                                    child: SingleChildScrollView(
+                                        child: ReportTable(tableItems: reportViewModel.checklistTableData))
                                   )
                                 ],
                               ),
@@ -327,7 +328,7 @@ class ReportView extends StatelessWidget {
                                 Expanded(
                                   child: SyncDonutChartWidget(
                                     centerTitle: '스키마',
-                                    data: chartData.map((item) => {'label': item.label, 'value': item.value}).toList(),
+                                    data: reportViewModel.schemaChartData.map((item) => {'label': item.label, 'value': item.value}).toList(),
                                   ),
                                 ),
                               ],
@@ -453,7 +454,7 @@ class _CardPagerState extends State<CardPager> {
                                               color: Colors.black,
                                               borderRadius: BorderRadius.circular(4)
                                           ),
-                                          child: Image.asset('assets/images/perplexity.png', width: 20, height: 20,)),
+                                          child: Image.asset('assets/images/perplexity.png', width: 15, height: 15,)),
                                       SizedBox(width: 5),
                                       Card(
                                         color: Colors.blue.shade50,

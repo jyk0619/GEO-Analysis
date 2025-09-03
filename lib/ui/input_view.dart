@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geo/ui/report_view.dart';
+import 'package:geo/viewmodels/report_vm.dart';
+import 'package:provider/provider.dart';
+import 'package:geo/viewmodels/input_vm.dart';
 
 
 class InputView extends StatelessWidget {
@@ -10,6 +13,7 @@ class InputView extends StatelessWidget {
     final TextEditingController domainController = TextEditingController();
     final TextEditingController intentController = TextEditingController();
 
+    final viewmodel = Provider.of<ReportViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -45,12 +49,11 @@ class InputView extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      // 버튼 클릭 시 동작할 코드 작성
+                    onPressed: () async {
                       String domain = domainController.text;
                       String intent = intentController.text;
                       print('도메인: $domain, 의도: $intent');
-
+                      await viewmodel.fetchAndProcessData();
                       Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) => ReportView()
@@ -59,6 +62,10 @@ class InputView extends StatelessWidget {
                     },
                     child: Text('제출'),
                   ),
+                  SizedBox(height: 20),
+                  ElevatedButton(onPressed: (){
+                    print('api test');
+                  }, child: Text('테스트'))
                 ],
               ),
             ),
